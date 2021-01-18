@@ -14,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
 
   // This section contains the relationships for this model. See: https://docs.forestadmin.com/documentation/v/v6/reference-guide/relationships#adding-relationships.
   Programs.associate = (models) => {
+    Programs.hasMany(models.exercises, {
+      foreignKey: {
+        name: 'programIdKey',
+        field: 'program_id',
+      },
+      as: 'exercises',
+    });    
     Programs.belongsTo(models.translates, {
       foreignKey: {
         name: 'nameCodeKey',
@@ -21,13 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       targetKey: 'code',
       as: 'nameCode',
-    });
-    Programs.belongsToMany(models.translates, {
-      through: 'excercices',
-      foreignKey: 'program_id',
-      otherKey: 'name_code',
-      as: 'translatesThroughExcercices',
-    });
+    });    
   };
 
   return Programs;
