@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         field: 'name_code',
       },
       targetKey: 'code',
-      as: 'nameCode',
+      as: 'translate',
     });    
   };
 

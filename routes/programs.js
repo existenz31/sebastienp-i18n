@@ -31,14 +31,15 @@ router.delete('/programs/:recordId', permissionMiddlewareCreator.delete(), (requ
 
 // Get a list of Programs
 router.get('/programs', permissionMiddlewareCreator.list(), (request, response, next) => {
-  const recordsGetter = new RecordsGetter(programs);
-  recordsGetter.getAll(request.query)
-    .then(async records => {
-      await new I18nService(request.user).translate(records, ['nameCode']);;
-      return recordsGetter.serialize(records);
-    })
-    .then(recordsSerialized => response.send(recordsSerialized))
-    .catch(next);
+  // const recordsGetter = new RecordsGetter(programs);
+  // recordsGetter.getAll(request.query)
+  //   .then(async records => {
+  //     await new I18nService(request.user).translate(records, ['nameCode']);
+  //     return recordsGetter.serialize(records);
+  //   })
+  //   .then(recordsSerialized => response.send(recordsSerialized))
+  //   .catch(next);
+    next();
 });
 
 // Get a number of Programs

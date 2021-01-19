@@ -131,7 +131,7 @@
       "inverseOf": null,
       "validations": []
     }, {
-      "field": "nameCode",
+      "field": "translate",
       "type": "String",
       "defaultValue": null,
       "enums": null,

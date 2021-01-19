@@ -4,9 +4,32 @@ const { translates } = require('../models');
 const DEFAULT_LANGUAGE = 'enUs'
 
 class I18nService {
-  constructor(user, models) {
+  constructor(user) {
     this.user = user;
   } 
+
+  async translateField (fieldCode) {
+    let languageColumn = DEFAULT_LANGUAGE; // default value
+    switch(this.user.team) {
+      case 'Team FR':
+        languageColumn = 'frFr';
+        break;
+      case 'Team ES':
+        languageColumn = 'esEs';
+        break;
+      case 'Team EN':
+        languageColumn = 'enUs';
+        break;
+     }
+     let translate = await translates.findByPk(fieldCode);
+     let label = translate[languageColumn];
+     if (!label) {
+       // Column not translated => set default language value
+       label = '*** '.concat(recordField[DEFAULT_LANGUAGE]).concat(' ***');
+     }
+     return label;
+
+  }    
 
   async translate (records, fields) {
     let languageColumn = DEFAULT_LANGUAGE; // default value
