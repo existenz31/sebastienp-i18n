@@ -10,6 +10,7 @@ class I18nService {
 
   async translateField (fieldCode) {
     let languageColumn = DEFAULT_LANGUAGE; // default value
+    if (!this.user) return null;
     switch(this.user.team) {
       case 'Team FR':
         languageColumn = 'frFr';
