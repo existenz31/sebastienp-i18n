@@ -48,13 +48,16 @@
       "isFilterable": true,
       "isPrimaryKey": false,
       "isReadOnly": false,
-      "isRequired": false,
+      "isRequired": true,
       "isSortable": true,
       "isVirtual": false,
-      "reference": "translates.nameCodeKey",
+      "reference": null,
       "inverseOf": null,
-      "relationship": "BelongsTo",
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
     }, {
       "field": "program",
       "type": "Number",
@@ -139,16 +142,42 @@
       "isFilterable": true,
       "isPrimaryKey": false,
       "isReadOnly": false,
-      "isRequired": false,
+      "isRequired": true,
       "isSortable": true,
       "isVirtual": false,
-      "reference": "translates.nameCodeKey",
+      "reference": null,
       "inverseOf": null,
-      "relationship": "BelongsTo",
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
     }],
     "segments": [],
-    "actions": []
+    "actions": [{
+      "name": "Test",
+      "type": "single",
+      "baseUrl": null,
+      "endpoint": "/forest/actions/test/:appCommoId",
+      "httpMethod": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [{
+        "field": "A field",
+        "type": "String",
+        "defaultValue": null,
+        "enums": null,
+        "isRequired": true,
+        "reference": null,
+        "description": null,
+        "position": 0,
+        "widget": null
+      }],
+      "hooks": {
+        "change": [],
+        "load": true
+      }
+    }]
   }, {
     "name": "translates",
     "nameOld": "translates",

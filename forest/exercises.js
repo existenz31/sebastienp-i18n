@@ -1,17 +1,15 @@
 const { collection } = require('forest-express-sequelize');
 
-// This file allows you to add to your Forest UI:
-// - Smart actions: https://docs.forestadmin.com/documentation/reference-guide/actions/create-and-manage-smart-actions
-// - Smart fields: https://docs.forestadmin.com/documentation/reference-guide/fields/create-and-manage-smart-fields
-// - Smart relationships: https://docs.forestadmin.com/documentation/reference-guide/relationships/create-a-smart-relationship
-// - Smart segments: https://docs.forestadmin.com/documentation/reference-guide/segments/smart-segments
+const I18nService = require('../services/i18n-service');
+
 collection('exercises', {
   actions: [],
   fields: [{
     field: 'label',
     type: 'String',
-    get: (exercise) => {
-      return exercise.nameCode.label;
+    get: (exercise, userRequest) => {
+      return new I18nService(userRequest).translate(exercise, 'nameCode');
+//      return program.nameCode?program.nameCode.label:null;
     }
   }],
   segments: [],

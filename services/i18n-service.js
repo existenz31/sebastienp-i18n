@@ -5,12 +5,11 @@ const DEFAULT_LANGUAGE = 'enUs'
 
 
 class I18nService {
-  constructor(user, models) {
+  constructor(user) {
     this.user = user;
-
   } 
 
-  async translate (records, fields) {
+  async translate (record, field) {
     let languageColumn = DEFAULT_LANGUAGE; // default value
     switch(this.user.team) {
       case 'Team FR':
@@ -22,37 +21,15 @@ class I18nService {
       case 'Team EN':
         languageColumn = 'enUs';
         break;
-     }
-    for (let record of records) {
-      for (let field of fields) {
-        let recordField;
-        let tmp = field.split('.');
-        if (tmp.length == 2) {
-          recordField = record[tmp[0]][tmp[1]];
-        }
-        else {
-          recordField = record[field];
-        }
-        if(!recordField) {
-          let fieldIdKey;
-          if (tmp.length == 2) {
-            fieldIdKey = record[tmp[0]][tmp[1] + 'Key'];
-            recordField = record[tmp[0]][tmp[1]] = await translates.findByPk(fieldIdKey);
-            
-          }
-          else {
-            fieldIdKey = record[field + 'Key'];            
-            recordField = record[field] = await translates.findByPk(fieldIdKey);
-          }
-        };
-        recordField.label = recordField[languageColumn];
-        if (!recordField.label) {
-          // Column not translated => set default language value
-          recordField.label = '*** '.concat(recordField[DEFAULT_LANGUAGE]).concat(' ***');
-        }
-
-      }
     }
+    const fieldIdKey = record[field];   
+    let result =  await translates.findByPk(fieldIdKey);
+    let label = result[languageColumn];
+    if (!label) {
+      // Column not translated => set default language value
+      label = '*** '.concat(result[DEFAULT_LANGUAGE]).concat(' ***');
+    }
+    return label;
   }
 }
 

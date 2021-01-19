@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
   // This section contains the fields of your model, mapped to your table's columns.
   // Learn more here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/models/enrich-your-models#declaring-a-new-field-in-a-model
   const Programs = sequelize.define('programs', {
+    nameCode: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   }, {
     tableName: 'programs',
     underscored: true,
@@ -21,14 +25,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       as: 'exercises',
     });    
-    Programs.belongsTo(models.translates, {
-      foreignKey: {
-        name: 'nameCodeKey',
-        field: 'name_code',
-      },
-      targetKey: 'code',
-      as: 'nameCode',
-    });    
+    // Programs.belongsTo(models.translates, {
+    //   foreignKey: {
+    //     name: 'nameCodeKey',
+    //     field: 'name_code',
+    //   },
+    //   targetKey: 'code',
+    //   as: 'nameCode',
+    // });    
   };
 
   return Programs;

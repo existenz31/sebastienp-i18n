@@ -46,6 +46,11 @@ app.use(jwt({
   credentialsRequired: false,
 }));
 
+app.post('/forest/actions/test/:appCommoId/values', (request, response, next) => {
+  request.body.data.attributes.values['appCommoId'] = request.params.appCommoId;
+  next();
+});
+
 app.use('/forest', (request, response, next) => {
   if (PUBLIC_ROUTES.includes(request.url)) {
     return next();
