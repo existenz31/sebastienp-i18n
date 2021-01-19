@@ -3,9 +3,11 @@ const { translates } = require('../models');
 
 const DEFAULT_LANGUAGE = 'enUs'
 
+
 class I18nService {
   constructor(user, models) {
     this.user = user;
+
   } 
 
   async translate (records, fields) {

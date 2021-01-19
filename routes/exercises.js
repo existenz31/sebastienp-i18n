@@ -35,7 +35,7 @@ router.get('/exercises', permissionMiddlewareCreator.list(), (request, response,
   recordsGetter.getAll(request.query)
     .then(async records => {
       await new I18nService(request.user).translate(records, ['nameCode', 'program.nameCode']);
-      return recordsGetter.serialize(records);
+      return recordsGetter.serialize(records, {userRequest: request.user});
     })
     .then(recordsSerialized => response.send(recordsSerialized))
     .catch(next);

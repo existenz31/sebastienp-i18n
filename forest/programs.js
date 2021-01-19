@@ -10,7 +10,7 @@ collection('programs', {
   fields: [{
     field: 'label',
     type: 'String',
-    get: (program) => {
+    get: (program, userRequest) => {
       return program.nameCode?program.nameCode.label:null;
     }
   }],
