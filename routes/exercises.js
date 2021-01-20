@@ -31,14 +31,7 @@ router.delete('/exercises/:recordId', permissionMiddlewareCreator.delete(), (req
 
 // Get a list of Exercises
 router.get('/exercises', permissionMiddlewareCreator.list(), (request, response, next) => {
-  // const recordsGetter = new RecordsGetter(exercises);
-  // recordsGetter.getAll(request.query)
-  //   .then(async records => {
-  //     await new I18nService(request.user).translate(records, ['nameCode', 'program.nameCode']);
-  //     return recordsGetter.serialize(records);
-  //   })
-  //   .then(recordsSerialized => response.send(recordsSerialized))
-  //   .catch(next);
+
   next();
 });
 

@@ -2,7 +2,6 @@ const { collection } = require('forest-express-sequelize');
 
 const I18nService = require('../services/i18n-service');
 
-
 collection('translates', {
   actions: [],
   fields: [{
