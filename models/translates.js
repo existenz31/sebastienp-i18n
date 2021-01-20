@@ -31,7 +31,22 @@ module.exports = (sequelize, DataTypes) => {
 
   // This section contains the relationships for this model. See: https://docs.forestadmin.com/documentation/v/v6/reference-guide/relationships#adding-relationships.
   Translates.associate = (models) => {
-
+    Translates.hasMany(models.programs, {
+      foreignKey: {
+        name: 'nameCodeKey',
+        field: 'name_code',
+      },
+      sourceKey: 'code',
+      as: 'nameCodePrograms',
+    });
+    Translates.hasMany(models.exercises, {
+      foreignKey: {
+        name: 'nameCodeKey',
+        field: 'name_code',
+      },
+      sourceKey: 'code',
+      as: 'nameCodeExercises',
+    });
   };
 
   return Translates;

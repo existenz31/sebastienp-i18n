@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   // This section contains the fields of your model, mapped to your table's columns.
   // Learn more here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/models/enrich-your-models#declaring-a-new-field-in-a-model
   const Exercises = sequelize.define('exercises', {
+    
   }, {
     tableName: 'exercises',
     underscored: true,
@@ -14,13 +15,6 @@ module.exports = (sequelize, DataTypes) => {
 
   // This section contains the relationships for this model. See: https://docs.forestadmin.com/documentation/v/v6/reference-guide/relationships#adding-relationships.
   Exercises.associate = (models) => {
-    Exercises.belongsTo(models.programs, {
-      foreignKey: {
-        name: 'programIdKey',
-        field: 'program_id',
-      },
-      as: 'program',
-    });
     Exercises.belongsTo(models.translates, {
       foreignKey: {
         name: 'nameCodeKey',
@@ -28,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       targetKey: 'code',
       as: 'nameCode',
+    });
+    Exercises.belongsToMany(models.programs, {
+      through: 'programsExercises',
+      foreignKey: 'exercise_id',
+      otherKey: 'program_id',
+      as: 'programsThroughProgramsExercises',
     });
   };
 
